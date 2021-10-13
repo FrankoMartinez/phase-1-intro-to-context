@@ -61,11 +61,11 @@ function wagesEarnedOnDate(obj, date) {
 
 function allWagesFor(obj) {
     let timeIn = obj.timeInEvents
-    let date = timeIn.map(element => element.date)
-    // let dayPay = date.forEach(element => {
-    //     return wagesEarnedOnDate(obj, element) * hoursWorkedOnDate(obj, element)
-    // })
-    const reducer = (wagesEarnedOnDate, hoursWorkedOnDate) => wagesEarnedOnDate + hoursWorkedOnDate
-    let dayPay = date.reduce(reducer)
-    return parseInt(dayPay, 0)
+    let dates = timeIn.map(element => element.date)
+    // array.prototype.reduce((runningTotal, currentValue) => runningTotal + current, initalValue)
+    return dates.reduce((runningTotal, date) => runningTotal + wagesEarnedOnDate(obj, date), 0)
+}
+
+function calculatePayroll(array) {
+ return array.reduce((runningTotal, element) => runningTotal + allWagesFor(element), 0)
 }
